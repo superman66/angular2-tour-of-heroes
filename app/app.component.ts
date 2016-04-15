@@ -5,6 +5,7 @@ import {Component} from 'angular2/core';
 import {Hero} from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HEROES} from './mock-heroes';
+import {HeroService} from './hero.service';
 
 @Component({
     selector: 'my-app',
@@ -19,6 +20,7 @@ import {HEROES} from './mock-heroes';
       <my-hero-detail [hero]="selectedHero"></my-hero-detail>
       `,
     directives: [HeroDetailComponent],
+    provider: [HeroService],
     styles: [`
   .selected {
     background-color: #CFD8DC !important;
@@ -76,6 +78,14 @@ export class AppComponent {
     public heroes = HEROES;
     title = 'Tour of Heroes';
     selectedHero:Hero;
+
+    constructor(private _heroService:HeroService) {
+
+    }
+
+    getHeroes(){
+        this.heroes = this._heroService.getHeroes();
+    }
 
     onSelect(hero:Hero) {
         this.selectedHero = hero;
