@@ -20,7 +20,7 @@ import {HeroService} from './hero.service';
       <my-hero-detail [hero]="selectedHero"></my-hero-detail>
       `,
     directives: [HeroDetailComponent],
-    provider: [HeroService],
+    providers: [HeroService],
     styles: [`
   .selected {
     background-color: #CFD8DC !important;
@@ -75,7 +75,7 @@ import {HeroService} from './hero.service';
 })
 
 export class AppComponent {
-    public heroes = HEROES;
+    heroes:Hero [];
     title = 'Tour of Heroes';
     selectedHero:Hero;
 
@@ -83,8 +83,12 @@ export class AppComponent {
 
     }
 
-    getHeroes(){
-        this.heroes = this._heroService.getHeroes();
+    getHeroes() {
+        this._heroService.getHeroes().then(heroes => this.heroes = heroes);
+    }
+
+    ngOnInit(){
+        this.getHeroes();
     }
 
     onSelect(hero:Hero) {
