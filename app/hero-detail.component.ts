@@ -8,12 +8,11 @@ import {RouteParams} from "angular2/router";
 
 @Component({
     selector: 'my-hero-detail',
-    template: 'app/hero-detail.component.html'
+    templateUrl: 'app/hero-detail.component.html'
     ,
 })
 
 export class HeroDetailComponent implements OnInit{
-    @Input()//@Input的作用
     hero: Hero;
 
     constructor(private _heroService: HeroService, private _routeParams: RouteParams){}
